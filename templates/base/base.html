@@ -1,0 +1,23 @@
+{% load relinking %}
+
+<html>
+    <head>
+        <title>Django-relinking example</title>
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css">
+    </head>
+    <body>
+        <ul id="menu">
+            <li><a href="{% url 'text_page' %}">Text page</a></li>
+            <li><a href="{% url 'index_page' %}">Models list</a></li>
+        </ul>
+        <div id="content">
+            {% block content %}
+            {% endblock %}
+        </div>
+        <footer>
+            {% filter relink %}
+                Some footer text. Keywords: google, entry #1, model #2
+            {% endfilter %}
+        </footer>
+    </body>
+</html>

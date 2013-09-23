@@ -1,0 +1,12 @@
+{% extends "base/base.html" %}
+
+{% load relinking %}
+
+{% block content %}
+    <h1>{{ obj.title }}</h1>
+    <p>
+        {% filter relink %}
+            {{ obj.description }}
+        {% endfilter %}
+    </p>
+{% endblock %}

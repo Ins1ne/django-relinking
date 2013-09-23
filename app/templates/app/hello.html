@@ -1,0 +1,9 @@
+{% extends "base/base.html" %}
+
+{% load relinking %}
+
+{% block content %}
+    {% filter relink %}
+        Hello world!
+    {% endfilter %}
+{% endblock %}
