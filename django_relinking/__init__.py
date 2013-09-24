@@ -1,6 +1,5 @@
 # coding: utf-8
 from django.conf import settings
-from django.core.cache import cache
 from django_relinking.models import Link
 from hashlib import md5
 
@@ -38,6 +37,7 @@ def get_relinked_text(origin):
 
 def relink_text(origin):
     if enable_cache:
+        from django.core.cache import cache
         key = key_pattern.format(
             links_table=Link._meta.db_table,
             hash=md5(origin).hexdigest()
