@@ -20,7 +20,7 @@ class Link(models.Model):
         max_length=255,
         default=None,
         null=True,
-        blank=False,
+        blank=True,
         choices=[]
     )
     object_pk = models.CharField(
@@ -28,7 +28,7 @@ class Link(models.Model):
         max_length=255,
         default=None,
         null=True,
-        blank=False
+        blank=True
     )
 
     direct_link = models.CharField(
@@ -36,7 +36,7 @@ class Link(models.Model):
         max_length=255,
         default=None,
         null=True,
-        blank=False,
+        blank=True,
         help_text=_(u"If you set this field, 'content type' and 'object primary key' will not be used")
     )
 

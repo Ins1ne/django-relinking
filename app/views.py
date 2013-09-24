@@ -11,6 +11,10 @@ class CustomView(View):
     def get(self, request):
         return render(request, "app/hello.html")
 
+    @classmethod
+    def get_absolute_url(cls):
+        return "#"
+
 
 register(CustomView, "Custom view")
 
