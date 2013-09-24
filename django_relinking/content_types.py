@@ -71,7 +71,7 @@ def objects_choices(content_type):
     ct = __CONTENT_TYPES__[content_type]
     objects = ct.objects
     if objects is None:
-        return [(-1, "'{}' hasn't objects".format(ct.verbose_name))]
+        return [(-1, u"'{}' hasn't objects".format(ct.verbose_name))]
     return ((ob.pk, unicode(ob)) for ob in objects)
 
 
