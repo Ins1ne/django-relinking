@@ -1,4 +1,5 @@
 {% load relinking %}
+{% load i18n %}
 
 <html>
     <head>
@@ -6,6 +7,7 @@
         <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css">
     </head>
     <body>
+        <h2>{% get_current_language as lng %}{{ lng }}</h2>
         <ul id="menu">
             <li><a href="{% url 'text_page' %}">Text page</a></li>
             <li><a href="{% url 'index_page' %}">Models list</a></li>
