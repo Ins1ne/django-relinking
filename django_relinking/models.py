@@ -66,7 +66,7 @@ class Link(models.Model):
         return get_object(self.content_type, self.object_pk).get_absolute_url()
 
     def __unicode__(self):
-        return "{}: {}".format(", ".join(self.keys_list), self.url)
+        return self.keys
 
     class Meta(object):
         ordering = ["priority"]
