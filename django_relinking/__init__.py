@@ -17,6 +17,7 @@ key_pattern = getattr(
     settings, "RELINKING_CACHE_PREFIX",
     "{links_table}.{hash}"
 )
+enable_cache = getattr(settings, "RELINKING_ENABLE_CACHE", False)
 
 
 def get_relinked_text(origin):
@@ -36,12 +37,15 @@ def get_relinked_text(origin):
 
 
 def relink_text(origin):
-    key = key_pattern.format(
-        links_table=Link._meta.db_table,
-        hash=md5(origin).hexdigest()
-    )
-    relinked = cache.get(key, None)
-    if relinked is None:
+    if enable_cache:
+        key = key_pattern.format(
+            links_table=Link._meta.db_table,
+            hash=md5(origin).hexdigest()
+        )
+        relinked = cache.get(key, None)
+        if relinked is None:
+            relinked = get_relinked_text(origin)
+            cache.set(key, relinked)
+    else:
         relinked = get_relinked_text(origin)
-        cache.set(key, relinked)
     return relinked
