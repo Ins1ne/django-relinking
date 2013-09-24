@@ -29,10 +29,7 @@ class LinkForm(forms.ModelForm):
         attrs = {}
         if not is_object_required:
             attrs["disabled"] = "disabled"
-        self.fields["object_pk"].widget = forms.Select(
-            choices=choices
-        )
-        print self.fields["object_pk"].widget.choices
+        self.fields["object_pk"].widget = forms.Select(choices=choices, attrs=attrs)
         self.fields["content_type"].required = is_object_required
         self.fields["object_pk"].required = is_object_required
 
