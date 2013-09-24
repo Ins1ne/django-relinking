@@ -62,6 +62,7 @@ unregister_all(content_type1, content_type2, ..., content_typeN)
 ```
 ---
 *When you register appropriate content types you can:*
+------------------------------------------------------
 **In template:**
 ```html
 {% load relinking %}
