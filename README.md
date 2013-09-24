@@ -7,6 +7,7 @@ Installation
 ------------------------
 1. Run from command line "pip install git+git://github.com/beslave/django-relinking.git@0.0.1"
 2. Added "django_relinking" to INSTALLED_APPS in your settings package
+3. Run migrations: ``` python manage.py migrate django_relinking ```
 
 Options
 ------------------------
