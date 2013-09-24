@@ -1,16 +1,25 @@
 # coding: utf-8
 from django.conf import settings
+from django.core.cache import cache
 from django_relinking.models import Link
+from hashlib import md5
 
 
 link_template = getattr(
     settings, "RELINKING_LINK_TEMPLATE",
     '<a target="{target}" href="{url}">{text}</a>'
 )
-index_pattern = '<%=link {}=%>'
+index_pattern = getattr(
+    settings, "RELINKING_INDEX_PATTERN",
+    "<%=link {}=%>"
+)
+key_pattern = getattr(
+    settings, "RELINKING_CACHE_PREFIX",
+    "{links_table}.{hash}"
+)
 
 
-def relink_text(origin):
+def get_relinked_text(origin):
     links = []
     for link in Link.objects.all():
         for key in link.keys_list:
@@ -24,3 +33,15 @@ def relink_text(origin):
     for i, link in enumerate(links):
         origin = origin.replace(index_pattern.format(i), link)
     return origin
+
+
+def relink_text(origin):
+    key = key_pattern.format(
+        links_table=Link._meta.db_table,
+        hash=md5(origin).hexdigest()
+    )
+    relinked = cache.get(key, None)
+    if relinked is None:
+        relinked = get_relinked_text(origin)
+        cache.set(key, relinked)
+    return relinked
