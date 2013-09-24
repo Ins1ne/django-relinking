@@ -12,13 +12,13 @@ Options
 ------------------------
 _If you want you can redefine next options:_
 + __RELINKING_LINK_TEMPLATE__ - template for link tag.
-... *Default*: ```RELINKING_LINK_TEMPLATE = '<a target="{target}" href="{url}">{text}</a>'```
+*Default*: ```RELINKING_LINK_TEMPLATE = '<a target="{target}" href="{url}">{text}</a>'```
 + __RELINKING_ENABLE_CACHE__ - enable or disable caching.
-... *Default*: ```RELINKING_ENABLE_CACHE = False```
+*Default*: ```RELINKING_ENABLE_CACHE = False```
 + __RELINKING_CACHE_PREFIX__ - prefix for keys in cache.
-... *Default*: ```RELINKING_CACHE_PREFIX = "{links_table}.{hash}"```
+*Default*: ```RELINKING_CACHE_PREFIX = "{links_table}.{hash}"```
 + __RELINKING_INDEX_PATTERN__ - temporary pattern for replacting keys to link indexes.
-... *Default*: ```RELINKING_INDEX_PATTERN =  "<%=link {}=%>"```
+*Default*: ```RELINKING_INDEX_PATTERN =  "<%=link {}=%>"```
 
 Usage
 ------------------------
