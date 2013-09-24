@@ -10,14 +10,14 @@ Installation
 
 Options
 ------------------------
-*If you want you can redefine next options:*
-1. __RELINKING_LINK_TEMPLATE__ - template for link tag.
+_If you want you can redefine next options:_
++ __RELINKING_LINK_TEMPLATE__ - template for link tag.
 ... *Default*: ```RELINKING_LINK_TEMPLATE = '<a target="{target}" href="{url}">{text}</a>'```
-2. __RELINKING_ENABLE_CACHE__ - enable or disable caching.
++ __RELINKING_ENABLE_CACHE__ - enable or disable caching.
 ... *Default*: ```RELINKING_ENABLE_CACHE = False```
-3. __RELINKING_CACHE_PREFIX__ - prefix for keys in cache.
++ __RELINKING_CACHE_PREFIX__ - prefix for keys in cache.
 ... *Default*: ```RELINKING_CACHE_PREFIX = "{links_table}.{hash}"```
-4. __RELINKING_INDEX_PATTERN__ - temporary pattern for replacting keys to link indexes.
++ __RELINKING_INDEX_PATTERN__ - temporary pattern for replacting keys to link indexes.
 ... *Default*: ```RELINKING_INDEX_PATTERN =  "<%=link {}=%>"```
 
 Usage
@@ -44,7 +44,7 @@ objects - queryset or list of this content_type objects (for example Model.objec
 register(content_type, verbose_name, objects)
 ```
 
-* Also you can:*
+*Also you can:*
 ```python
 from django_relinking.content_types import register_all, unregister, unregister_all
 #
