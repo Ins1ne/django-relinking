@@ -62,7 +62,7 @@ unregister_all(content_type1, content_type2, ..., content_typeN)
 ```
 ---
 *When you register appropriate content types you can:*
-* In template:
+**In template:**
 ```html
 {% load relinking %}
 <!-- Plain text -->
@@ -72,7 +72,7 @@ unregister_all(content_type1, content_type2, ..., content_typeN)
 <!-- variable -->
 {{ model.attr|relink }}
 ```
-* In code:
+**In code:**
 ```python
 from django_relinking import relink_text
 relinked = relink_text(some_text_with_keywords)
