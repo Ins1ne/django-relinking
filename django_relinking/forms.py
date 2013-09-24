@@ -22,14 +22,17 @@ class LinkForm(forms.ModelForm):
             or self.instance.content_type
             or (types_choices and types_choices[0][0])
         )
-        choices = objects_choices(ctype) if ctype else []
+        choices = list(objects_choices(ctype) if ctype else [])
 
         is_object_required = -1 not in dict(choices)
 
         attrs = {}
         if not is_object_required:
             attrs["disabled"] = "disabled"
-        self.fields["object_pk"].widget = forms.Select(choices=choices, attrs=attrs)
+        self.fields["object_pk"].widget = forms.Select(
+            choices=choices
+        )
+        print self.fields["object_pk"].widget.choices
         self.fields["content_type"].required = is_object_required
         self.fields["object_pk"].required = is_object_required
 
