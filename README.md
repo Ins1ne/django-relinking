@@ -30,7 +30,8 @@ from django_relinking.content_types import register
 """
 content_type - class of model or view which has method 'get_absolute_url`
 
-verbose_name - human title of content type. verbose_name can be a function. Default is None.
+verbose_name - human title of content type.
+--- verbose_name can be a function. Default is None.
 --- If verbose_name is None and content_type has attribute 'verbose_name',
 ------ then verbose_name = content_type.verbose_name
 --- If verbose_name is None and content_type has method 'verbose_name',
@@ -38,9 +39,11 @@ verbose_name - human title of content type. verbose_name can be a function. Defa
 --- If verbose_name is None and content_type hasn't attribute 'verbose_name'
 ------ then verbose_name = content_type.__name__
 
-objects - queryset or list of this content_type objects (for example Model.objects.all()).
+objects - queryset or list of this content_type objects.
+--- For example: ``` Model.objects.all() ```.
 --- Every objects must have attribute pk and `get_absolute_url` method
---- If objects is None - this content type is a single and it must have `get_absolute_url` method
+--- If objects is None - this content type is a single
+--- and it must have `get_absolute_url` method
 """
 register(content_type, verbose_name, objects)
 ```
