@@ -13,7 +13,8 @@ setup(
     version='0.0.1',
     packages=['django_relinking', 'django_relinking.migrations', 'django_relinking.templatetags'],
     install_requires=[
-        'south'
+        'django>=1.4.5'
+        'south>=0.7.6'
     ],
     include_package_data=True,
     license='BSD License',
