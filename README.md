@@ -6,7 +6,7 @@ Django-relinking application adds function and template filter for relinking cus
 Installation
 ------------------------
 1. Run from command line "pip install django-relinking"
-2. Added "django_relinking" to INSTALLED_APPS in your settings package
+2. Add "django_relinking" to INSTALLED_APPS in your settings package
 3. Run migrations: ``` python manage.py migrate django_relinking ```
 
 Options
