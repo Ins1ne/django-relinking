@@ -9,7 +9,7 @@ README = open(os.path.join(os.path.dirname(__file__), 'README.md')).read()
 os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
-    name='django_relinking',
+    name='django-relinking',
     version='0.0.1',
     packages=['django_relinking', 'django_relinking.migrations', 'django_relinking.templatetags'],
     install_requires=[
