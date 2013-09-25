@@ -1,5 +1,5 @@
-include LICENSE
+#include LICENSE
 include README.md
 recursive-include django_relinking/locale *
 recursive-include django_relinking/static *
-recursive-include django_relinking/templates *
+#recursive-include django_relinking/templates *
