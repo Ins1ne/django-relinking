@@ -10,7 +10,7 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='django-relinking',
-    version='0.0.1',
+    version='0.0.2',
     packages=['django_relinking', 'django_relinking.migrations', 'django_relinking.templatetags'],
     install_requires=[
         'django>=1.4.5',

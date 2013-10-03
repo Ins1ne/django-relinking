@@ -3,24 +3,43 @@ from django.conf import settings
 from django_relinking.models import Link
 from hashlib import md5
 
+import re
+
 
 link_template = getattr(
-    settings, "RELINKING_LINK_TEMPLATE",
-    '<a target="{target}" href="{url}">{text}</a>'
+    settings, 'RELINKING_LINK_TEMPLATE',
+    u'<a target="{target}"" href="{url}">{text}</a>'
 )
 index_pattern = getattr(
-    settings, "RELINKING_INDEX_PATTERN",
-    "<%=link {}=%>"
+    settings, 'RELINKING_INDEX_PATTERN',
+    u'<%=link {}=%>'
 )
 key_pattern = getattr(
-    settings, "RELINKING_CACHE_PREFIX",
-    "{links_table}.{hash}"
+    settings, 'RELINKING_CACHE_PREFIX',
+    u'{links_table}.{hash}'
 )
-enable_cache = getattr(settings, "RELINKING_ENABLE_CACHE", False)
+enable_cache = getattr(settings, 'RELINKING_ENABLE_CACHE', False)
+
+a_pattern = re.compile(r'<\s*a.*<\s*/\s*a\s*>')
 
 
 def get_relinked_text(origin):
-    links = []
+
+    class LinkReplacer(object):
+
+        def __init__(self, *a, **k):
+            self.replacements = 0
+            self.links = []
+
+        def __call__(self, m):
+            self.replacements += 1
+            self.links.append(m.group(0))
+            return index_pattern.format(self.replacements)
+
+    repl = LinkReplacer()
+    re.subn(a_pattern, repl, origin)
+    links = repl.links
+
     for link in Link.objects.all():
         for key in link.keys_list:
             i = len(links)
@@ -29,6 +48,8 @@ def get_relinked_text(origin):
                 url=link.url,
                 text=key
             ))
+            if type(origin) != unicode:
+                origin = origin.decode('utf-8')
             origin = origin.replace(key, index_pattern.format(i))
     for i, link in enumerate(links):
         origin = origin.replace(index_pattern.format(i), link)
