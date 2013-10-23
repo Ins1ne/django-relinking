@@ -8,7 +8,7 @@ import re
 
 link_template = getattr(
     settings, 'RELINKING_LINK_TEMPLATE',
-    u'<a target="{target}"" href="{url}">{text}</a>'
+    u'<a target="{target}" href="{url}">{text}</a>'
 )
 index_pattern = getattr(
     settings, 'RELINKING_INDEX_PATTERN',
@@ -34,10 +34,10 @@ def get_relinked_text(origin):
         def __call__(self, m):
             self.replacements += 1
             self.links.append(m.group(0))
-            return index_pattern.format(self.replacements)
+            return index_pattern.format(self.replacements - 1)
 
     repl = LinkReplacer()
-    re.subn(a_pattern, repl, origin)
+    origin = re.subn(a_pattern, repl, origin)[0]
     links = repl.links
 
     for link in Link.objects.all():
@@ -48,7 +48,7 @@ def get_relinked_text(origin):
                 url=link.url,
                 text=key
             ))
-            if type(origin) != unicode:
+            if not isinstance(origin, unicode):
                 origin = origin.decode('utf-8')
             origin = origin.replace(key, index_pattern.format(i))
     for i, link in enumerate(links):
@@ -61,7 +61,9 @@ def relink_text(origin):
         from django.core.cache import cache
         key = key_pattern.format(
             links_table=Link._meta.db_table,
-            hash=md5(origin).hexdigest()
+            hash=md5(
+                origin.encode('utf-8') if isinstance(origin, unicode) else origin
+            ).hexdigest()
         )
         relinked = cache.get(key, None)
         if relinked is None:
